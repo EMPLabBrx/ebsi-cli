@@ -1,0 +1,14 @@
+# request VerifiableAuthorisationForTrustChain (Root TAO)
+vcRootTAO: conformance getCredential roottao ES256 vcOnboard.vc
+
+# register the credential for RootTAO
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+tir setAttributeData myIssuer.did vcRootTAO.reservedAttributeId vcRootTAO.vc
+
+# Go to https://api-conformance.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Request VerifiableAuthorisationForTrustChain
+#   - Request VerifiableAuthorisationForTrustChain
+#   - Register VerifiableAuthorisationForTrustChain into the Trusted Issuers Registry

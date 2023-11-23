@@ -1,0 +1,26 @@
+run bootstrap/0b-loadAdmin
+
+## Insert generic apps
+proxyledger tar-new insertApp ledger-api
+proxyledger tar-new insertApp did-registry-api
+proxyledger tar-new insertApp timestamp-api
+proxyledger tar-new insertApp trusted-issuers-registry-api
+proxyledger tar-new insertApp trusted-policies-registry-api
+proxyledger tar-new insertApp trusted-schemas-registry-api
+proxyledger tar-new insertApp ebsi-core-services
+proxyledger tar-new insertApp authorisation-api
+
+## Authorizations between apps
+
+# APIs that need to access the blockchain through ledger-api
+#   Note: trusted-apps-registry-api doesn't require
+#   authorization because it connects directly to besu
+proxyledger tar-new insertAuthorization ledger-api did-registry-api
+proxyledger tar-new insertAuthorization ledger-api timestamp-api
+proxyledger tar-new insertAuthorization ledger-api trusted-issuers-registry-api
+proxyledger tar-new insertAuthorization ledger-api trusted-policies-registry-api
+proxyledger tar-new insertAuthorization ledger-api trusted-schemas-registry-api
+
+# With regarding users, each API will authorize tokens issued by
+# authorisation-api, and the set of API is defined as ebsi-core-services
+proxyledger tar-new insertAuthorization ebsi-core-services authorisation-api

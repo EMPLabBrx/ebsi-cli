@@ -1,0 +1,6 @@
+# DID admin
+run bootstrap/0b-loadAdmin
+proxyledger did-new insertDidDocument
+proxyledger did-new addVerificationMethod user.did ES256
+proxyledger did-new addVerificationRelationship user.did authentication ES256
+proxyledger did-new addVerificationRelationship user.did assertionMethod ES256

@@ -1,0 +1,11 @@
+# way of use:
+# ==> set domain https://api-test.ebsi.eu
+# ==> run issue_VerifiableAuthorisationForTrustChain <didIssuer> <didSubject> <issuerAttributeIdUrl> <reservedAttributeId>
+
+payloadVcRootTAO: load scripts/assets/VerifiableAuthorisationForTrustChain.json
+set payloadVcRootTAO.issuer $1
+set payloadVcRootTAO.credentialSubject.id $2
+set payloadVcRootTAO.termsOfUse.id $3
+set payloadVcRootTAO.credentialSchema.id domain /trusted-schemas-registry/v2/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM
+set payloadVcRootTAO.credentialSubject.reservedAttributeId $4
+compute createVcJwt payloadVcRootTAO {} ES256

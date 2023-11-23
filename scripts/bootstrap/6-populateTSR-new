@@ -1,0 +1,81 @@
+# before running the script download the schemas and put them in scripts/local/schemas
+run bootstrap/0b-loadAdmin
+
+# schemas that do not depend on others
+schema1: load scripts/local/schemas/ebsi-attestation/2022-11/schema.json
+schema2: load scripts/local/schemas/ebsi-attestation/2022-11_01/schema.json
+schema3: load scripts/local/schemas/ebsi-presentation/2022-11/schema.json
+schema4: load scripts/local/schemas/type-extensions/credentialStatus/StatusList2021/2022-11_01/schema.json
+schema5: load scripts/local/schemas/type-extensions/termsOfUse/AccreditationPolicy/2023-04/schema.json
+schema6: load scripts/local/schemas/type-extensions/termsOfUse/IssuanceCertificate/2022-11_01/schema.json
+schema7: load scripts/local/schemas/type-extensions/termsOfUse/TrustFrameworkPolicy/2023-04/schema.json
+
+id_attestation_2022-11: compute schemaId schema1
+id_attestation_2022-11_01: compute schemaId schema2
+
+# schemas with id_attestation_2022-11_01
+schema8: load scripts/local/schemas/ebsi-accreditation/2022-11_01/schema.json
+schema9: load scripts/local/schemas/ebsi-accreditation/2023-04/schema.json
+schema10: load scripts/local/schemas/ebsi-ct-qualification/2023-05/schema.json
+schema11: load scripts/local/schemas/ebsi-essp/pda1/2022-11_01/schema.json
+schema12: load scripts/local/schemas/ebsi-euipo/certificate-of-trademark-registration/2023-02/schema.json
+schema13: load scripts/local/schemas/ebsi-muti-uni-pilot/my-academic-id/2023-05/schema.json
+schema14: load scripts/local/schemas/ebsi-revocation-statuslist/2022-11_01/schema.json
+
+set schema8.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+set schema9.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+set schema10.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+set schema11.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+set schema12.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+set schema13.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+set schema14.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+
+# schemas with id_attestation_2022-11
+schema15: load scripts/local/schemas/ebsi-essp/pda1/2022-11/schema.json
+schema16: load scripts/local/schemas/ebsi-muti-uni-pilot/education-verifiable-accreditation-records/2022-11/schema.json
+schema17: load scripts/local/schemas/ebsi-muti-uni-pilot/verifiable-attestation-individual-id/2022-11/schema.json
+schema18: load scripts/local/schemas/ebsi-muti-uni-pilot/verifiable-attestation-organisational-id/2022-11/schema.json
+schema19: load scripts/local/schemas/ebsi-muti-uni-pilot/verifiable-diploma/2022-11/schema.json
+schema20: load scripts/local/schemas/ebsi-revocation-statuslist/2022-11/schema.json
+schema21: load scripts/local/schemas/ebsi-verifiable-authorisation/2022-11/schema.json
+schema22: load scripts/local/schemas/ebsi-vid/legal-entity/2022-11/schema.json
+schema23: load scripts/local/schemas/ebsi-vid/natural-person/2022-11/schema.json
+schema24: load scripts/local/schemas/ebsi-vid/verifiable-authorisation/2022-11/schema.json
+
+set schema15.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema16.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema17.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema18.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema19.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema20.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema21.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema22.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema23.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+set schema24.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11
+
+proxyledger tsr-new insertSchema schema1 {}
+proxyledger tsr-new insertSchema schema2 {}
+proxyledger tsr-new insertSchema schema3 {}
+proxyledger tsr-new insertSchema schema4 {}
+proxyledger tsr-new insertSchema schema5 {}
+proxyledger tsr-new insertSchema schema6 {}
+proxyledger tsr-new insertSchema schema7 {}
+
+# skip these commands for later if TSR API v3 is not ready
+proxyledger tsr-new insertSchema schema8 {}
+proxyledger tsr-new insertSchema schema9 {}
+proxyledger tsr-new insertSchema schema10 {}
+proxyledger tsr-new insertSchema schema11 {}
+proxyledger tsr-new insertSchema schema12 {}
+proxyledger tsr-new insertSchema schema13 {}
+proxyledger tsr-new insertSchema schema14 {}
+proxyledger tsr-new insertSchema schema15 {}
+proxyledger tsr-new insertSchema schema16 {}
+proxyledger tsr-new insertSchema schema17 {}
+proxyledger tsr-new insertSchema schema18 {}
+#proxyledger tsr-new insertSchema schema19 {} # skip
+proxyledger tsr-new insertSchema schema20 {}
+proxyledger tsr-new insertSchema schema21 {}
+proxyledger tsr-new insertSchema schema22 {}
+proxyledger tsr-new insertSchema schema23 {}
+proxyledger tsr-new insertSchema schema24 {}

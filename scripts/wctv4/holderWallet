@@ -1,0 +1,38 @@
+using user ES256 did2
+
+c0: conformance-new holder CTWalletCrossAuthorisedInTime authorisedInTime
+conformance-new check ct_wallet_cross_authorised_in_time
+
+c1: conformance-new holder CTWalletCrossAuthorisedDeferred authorisedDeferred
+conformance-new check ct_wallet_cross_authorised_deferred
+
+c2: conformance-new holder CTWalletCrossPreAuthorisedInTime preAuthorisedInTime
+conformance-new check ct_wallet_cross_pre_authorised_in_time
+
+c3: conformance-new holder CTWalletCrossPreAuthorisedDeferred preAuthorisedDeferred
+conformance-new check ct_wallet_cross_pre_authorised_deferred
+
+c4: conformance-new holder CTWalletSameAuthorisedInTime authorisedInTime
+conformance-new check ct_wallet_same_authorised_in_time
+
+c5: conformance-new holder CTWalletSameAuthorisedDeferred authorisedDeferred
+conformance-new check ct_wallet_same_authorised_deferred
+
+c6: conformance-new holder CTWalletSamePreAuthorisedInTime preAuthorisedInTime
+conformance-new check ct_wallet_same_pre_authorised_in_time
+
+c7: conformance-new holder CTWalletSamePreAuthorisedDeferred preAuthorisedDeferred
+conformance-new check ct_wallet_same_pre_authorised_deferred
+
+set credentials []
+set credentials.0 c0
+set credentials.1 c1
+set credentials.2 c2
+set credentials.3 c3
+set credentials.4 c4
+set credentials.5 c5
+set credentials.6 c6
+set credentials.7 c7
+
+conformance-new holder CTWalletQualificationCredential authorisedInTime ES256 credentials
+conformance-new check request_ct_wallet_qualification_credential

@@ -1,0 +1,10 @@
+run bootstrap/0b-loadAdmin
+
+proxyledger timestamp insertHashAlgorithm 256 sha-256 2.16.840.1.101.3.4.2.1 1 sha2-256
+proxyledger timestamp insertHashAlgorithm 256 sha-256 2.16.840.1.101.3.4.2.1 1 sha2-256
+proxyledger timestamp insertHashAlgorithm 384 sha-384 2.16.840.1.101.3.4.2.2 1 sha2-384
+proxyledger timestamp insertHashAlgorithm 512 sha-512 2.16.840.1.101.3.4.2.3 1 sha2-512
+proxyledger timestamp insertHashAlgorithm 224 sha3-224 2.16.840.1.101.3.4.2.7 1 sha3-224
+proxyledger timestamp insertHashAlgorithm 256 sha3-256 2.16.840.1.101.3.4.2.8 1 sha3-256
+proxyledger timestamp insertHashAlgorithm 384 sha3-384 2.16.840.1.101.3.4.2.9 1 sha3-384
+proxyledger timestamp insertHashAlgorithm 512 sha3-512 2.16.840.1.101.3.4.2.10 1 sha3-512

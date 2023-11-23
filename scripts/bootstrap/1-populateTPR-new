@@ -1,0 +1,112 @@
+run bootstrap/0a-loadTPROperator
+
+# New Policies
+
+#DID
+proxyledger tpr-new insertPolicy DID:updateBaseDocument true ["updateBaseDocument in DID Registry"]
+proxyledger tpr-new insertPolicy DID:addController true ["addController in DID Registry"]
+proxyledger tpr-new insertPolicy DID:revokeController true ["revokeController in DID Registry"]
+proxyledger tpr-new insertPolicy DID:addVerificationMethod true ["addVerificationMethod in DID Registry"]
+proxyledger tpr-new insertPolicy DID:addVerificationRelationship true ["addVerificationRelationship in DID Registry"]
+proxyledger tpr-new insertPolicy DID:revokeVerificationMethod true ["revokeVerificationMethod in DID Registry"]
+proxyledger tpr-new insertPolicy DID:expireVerificationMethod true ["expireVerificationMethod in DID Registry"]
+proxyledger tpr-new insertPolicy DID:rollVerificationMethod true ["rollVerificationMethod in DID Registry"]
+
+#TIR
+proxyledger tpr-new insertPolicy TIR:updateIssuer true ["updateIssuer in Trusted Issuers Registry"]
+proxyledger tpr-new insertPolicy TIR:setAttributeMetadata true ["setAttributeMetadata in Trusted Issuers Registry"]
+
+#Timestamp
+proxyledger tpr-new insertPolicy TS:insertHashAlgorithm true ["insertHashAlgorithm in Timestamp"]
+proxyledger tpr-new insertPolicy TS:updateHashAlgorithm true ["updateHashAlgorithm in Timestamp"]
+
+#TSR
+proxyledger tpr-new insertPolicy TSR:insertSchema true ["insertSchema in Trusted Schemas Registry"]
+proxyledger tpr-new insertPolicy TSR:updateSchema true ["updateSchema in Trusted Schemas Registry"]
+proxyledger tpr-new insertPolicy TSR:updateMetadata true ["updateMetadata in Trusted Schemas Registry"]
+
+#TAR
+proxyledger tpr-new insertPolicy TAR:insertApp true ["insertApp in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:insertRevocation true ["insertRevocation in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:updateApp true ["updateApp in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:insertAppInfo true ["insertAppInfo in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:insertAuthorization true ["insertAuthorization in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:updateAuthorization true ["updateAuthorization in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:insertAppPublicKey true ["insertAppPublicKey in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:updateAppPublicKey true ["updateAppPublicKey in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:insertAppAdministrator true ["insertAppAdministrator in Trusted Apps Registry"]
+proxyledger tpr-new insertPolicy TAR:deleteAppAdministrator true ["deleteAppAdministrator in Trusted Apps Registry"]
+
+
+# User Attributes
+# List taken from https://ec.europa.eu/digital-building-blocks/wikis/display/BLOCKCHAININT/RFC+-+Procedure+for+multisig+wallet+maintenance
+
+# Iulian Florin NITA
+proxyledger tpr-new insertUserAttributes 0x1CBE1945fa323F5C5CeD4ec560C2D1600b4b4364 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x1CBE1945fa323F5C5CeD4ec560C2D1600b4b4364 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x1CBE1945fa323F5C5CeD4ec560C2D1600b4b4364 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x1CBE1945fa323F5C5CeD4ec560C2D1600b4b4364 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x1CBE1945fa323F5C5CeD4ec560C2D1600b4b4364 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Alen Horvat
+proxyledger tpr-new insertUserAttributes 0x30dE361706Ddc9D5D0B19AFe9B89212CcD453566 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x30dE361706Ddc9D5D0B19AFe9B89212CcD453566 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x30dE361706Ddc9D5D0B19AFe9B89212CcD453566 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x30dE361706Ddc9D5D0B19AFe9B89212CcD453566 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x30dE361706Ddc9D5D0B19AFe9B89212CcD453566 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Julian GONZALEZ AGUDELO
+proxyledger tpr-new insertUserAttributes 0x69e48d89bf5e09588E858D757323b4abBBB3f814 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x69e48d89bf5e09588E858D757323b4abBBB3f814 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x69e48d89bf5e09588E858D757323b4abBBB3f814 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x69e48d89bf5e09588E858D757323b4abBBB3f814 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x69e48d89bf5e09588E858D757323b4abBBB3f814 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# wesley DEGLISE
+proxyledger tpr-new insertUserAttributes 0x37daE23C7C8915E6b8FA13b32BBA00c6b6f35993 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x37daE23C7C8915E6b8FA13b32BBA00c6b6f35993 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x37daE23C7C8915E6b8FA13b32BBA00c6b6f35993 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x37daE23C7C8915E6b8FA13b32BBA00c6b6f35993 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x37daE23C7C8915E6b8FA13b32BBA00c6b6f35993 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Arnaud RIESS
+proxyledger tpr-new insertUserAttributes 0x9faB1fF75B0309e4dF4360331ed630F963a30869 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x9faB1fF75B0309e4dF4360331ed630F963a30869 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x9faB1fF75B0309e4dF4360331ed630F963a30869 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x9faB1fF75B0309e4dF4360331ed630F963a30869 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x9faB1fF75B0309e4dF4360331ed630F963a30869 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Guillermo Liarte Cano
+proxyledger tpr-new insertUserAttributes 0x108d42f3C66DB73E70B3fFe6Dd1F3ABb0f5C83A0 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x108d42f3C66DB73E70B3fFe6Dd1F3ABb0f5C83A0 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x108d42f3C66DB73E70B3fFe6Dd1F3ABb0f5C83A0 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x108d42f3C66DB73E70B3fFe6Dd1F3ABb0f5C83A0 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x108d42f3C66DB73E70B3fFe6Dd1F3ABb0f5C83A0 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Pablo STAIANO
+proxyledger tpr-new insertUserAttributes 0x3d47cfAeF18364586C9cCAF70F6ED79b2eA38429 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0x3d47cfAeF18364586C9cCAF70F6ED79b2eA38429 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0x3d47cfAeF18364586C9cCAF70F6ED79b2eA38429 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0x3d47cfAeF18364586C9cCAF70F6ED79b2eA38429 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0x3d47cfAeF18364586C9cCAF70F6ED79b2eA38429 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Yannick HUARD
+proxyledger tpr-new insertUserAttributes 0xfa8adA8Bd7CEbC130F455f5683ae173B3a3AC365 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0xfa8adA8Bd7CEbC130F455f5683ae173B3a3AC365 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0xfa8adA8Bd7CEbC130F455f5683ae173B3a3AC365 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0xfa8adA8Bd7CEbC130F455f5683ae173B3a3AC365 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0xfa8adA8Bd7CEbC130F455f5683ae173B3a3AC365 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Stefan-Adrian Bancu
+proxyledger tpr-new insertUserAttributes 0xaA61dA5CbC1E563F065Af74f278abd55c399353D ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0xaA61dA5CbC1E563F065Af74f278abd55c399353D ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0xaA61dA5CbC1E563F065Af74f278abd55c399353D ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0xaA61dA5CbC1E563F065Af74f278abd55c399353D ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0xaA61dA5CbC1E563F065Af74f278abd55c399353D ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]
+
+# Support EBSI
+proxyledger tpr-new insertUserAttributes 0xA4B6C8710f6bF233b8b480498916DEC224A5a891 ["DID:updateBaseDocument", "DID:addController", "DID:revokeController", "DID:addVerificationMethod", "DID:addVerificationRelationship", "DID:revokeVerificationMethod", "DID:expireVerificationMethod", "DID:rollVerificationMethod"]
+proxyledger tpr-new insertUserAttributes 0xA4B6C8710f6bF233b8b480498916DEC224A5a891 ["TIR:insertIssuer", "TIR:updateIssuer", "TIR:setAttributeMetadata"]
+proxyledger tpr-new insertUserAttributes 0xA4B6C8710f6bF233b8b480498916DEC224A5a891 ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"]
+proxyledger tpr-new insertUserAttributes 0xA4B6C8710f6bF233b8b480498916DEC224A5a891 ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"]
+proxyledger tpr-new insertUserAttributes 0xA4B6C8710f6bF233b8b480498916DEC224A5a891 ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"]

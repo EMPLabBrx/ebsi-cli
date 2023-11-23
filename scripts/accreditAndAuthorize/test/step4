@@ -1,0 +1,27 @@
+# request VerifiableAccreditationToAccredit (TAO)
+vcTAO: conformance getCredential tao
+
+# register the credential for TAO
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+tir setAttributeData myIssuer.did vcTAO.reservedAttributeId vcTAO.vc
+set vcTAO.url https://api-test.ebsi.eu/trusted-issuers-registry/v4/issuers/ myIssuer.did /attributes/ vcTAO.reservedAttributeId
+set user.accreditationUrl vcTAO.url
+conformance clientMockInitiate
+
+# Go to https://api-test.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Request VerifiableAccreditationToAccredit
+#   - Request VerifiableAccreditationToAccredit
+# - Register VerifiableAccreditationToAccredit into the Trusted Issuers Registry
+#   - Register VerifiableAccreditationToAccredit into the Trusted Issuers Registry
+# - Issue VerifiableAuthorisationToOnboard for Conformance Issuer's sub-account DID
+#   - Issue VerifiableAuthorisationToOnboard for Conformance Issuer's sub-account DID
+#   - Validate the issuance was correct
+# - Issue VerifiableAccreditationToAttest for sub-account DID
+#   - Issue VerifiableAccreditationToAttest for sub-account DID
+#   - Validate the issuance was correct
+# - Issue VerifiableAccreditationToAccredit for sub-account DID
+#   - Issue VerifiableAccreditationToAccredit for sub-account DID
+#   - Validate the issuance was correct

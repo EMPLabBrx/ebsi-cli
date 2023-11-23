@@ -1,0 +1,106 @@
+env test
+set domain https://api-test.ebsi.eu
+
+# create new issuer
+using user null
+using user
+using user ES256
+
+# request credential to onboard
+vcOnboard: conformance getCredential onboard
+set myIssuer user
+conformance check ti_request_verifiable_authorisation_to_onboard
+
+# register did document
+run registerDidDocument_ES256K_ES256 vcOnboard.vc
+conformance check ti_register_did
+
+# request VerifiableAccreditationToAttest (TI)
+vcTI: conformance getCredential ti
+conformance check ti_request_verifiable_accreditation_to_attest
+
+# register the credential for TI
+t: authorisation auth tir_invite_presentation ES256 vcTI.vc
+using token t.access_token
+tir setAttributeData myIssuer.did vcTI.reservedAttributeId vcTI.vc
+set vcTI.url https://api-test.ebsi.eu/trusted-issuers-registry/v4/issuers/ myIssuer.did /attributes/ vcTI.reservedAttributeId
+conformance check ti_register_verifiable_accreditation_to_attest
+
+# create a proxy
+conformance clientMockUpdateList 1 0 0
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+set proxyData {"prefix":"","headers":{},"testSuffix":"/credentials/status/1"}
+set proxyData.prefix myIssuer.clientId
+tir addIssuerProxy myIssuer.did proxyData
+proxies: tir get /issuers/ myIssuer.did /proxies
+set user.proxyId proxies.items.0.proxyId
+set user.accreditationUrl vcTI.url
+conformance clientMockInitiate
+
+# issue CTRevocable with credentialStatus StatusList2021
+conformance check ti_request_ctrevocable
+
+# Validate the issued credential details
+conformance check ti_validate_ctrevocable
+
+# revoke credential
+statusListIndex: compute statusListIndex did:ebsi:zy8jAhPDbhwKN74YFWAUzD5
+conformance clientMockUpdateList 1 statusListIndex 1
+conformance check ti_revoke_ctrevocable
+
+# request VerifiableAccreditationToAccredit (TAO)
+vcTAO: conformance getCredential tao
+conformance check tao_request_verifiable_accreditation_to_accredit
+
+# register the credential for TAO
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+tir setAttributeData myIssuer.did vcTAO.reservedAttributeId vcTAO.vc
+set vcTAO.url https://api-test.ebsi.eu/trusted-issuers-registry/v4/issuers/ myIssuer.did /attributes/ vcTAO.reservedAttributeId
+set user.accreditationUrl vcTAO.url
+conformance clientMockInitiate
+conformance check tao_register_verifiable_accreditation_to_accredit
+
+# request credential to onboard sub-account
+conformance check tao_request_verifiable_authorisation_to_onboard_subaccount
+
+# validate credential and register sub-account
+conformance check tao_validate_verifiable_authorisation_to_onboard_subaccount
+
+# request VerifiableAccreditationToAttest for sub-account (TI)
+conformance check tao_request_verifiable_accreditation_to_attest_subaccount
+
+# validate and register credential for sub-account
+conformance check tao_validate_verifiable_accreditation_to_attest_subaccount
+
+# request VerifiableAccreditationToAccredit for sub-account (TAO)
+conformance check tao_request_verifiable_accreditation_to_accredit_subaccount
+
+# validate and register credential for sub-account
+conformance check tao_validate_verifiable_accreditation_to_accredit_subaccount
+
+# revoke credentials issued to subaccount
+subaccount: compute subaccountDid myIssuer.did
+attributes: tir get /issuers/ subaccount /attributes
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+tir setAttributeMetadata subaccount attributes.items.0.id revoked myIssuer.did vcTAO.reservedAttributeId
+tir setAttributeMetadata subaccount attributes.items.1.id revoked myIssuer.did vcTAO.reservedAttributeId
+conformance check tao_revoke_rights_subaccount
+
+# request VerifiableAuthorisationForTrustChain (Root TAO)
+vcRootTAO: conformance getCredential roottao ES256 vcOnboard.vc
+conformance check rtao_request_verifiableauthorisationfortrustchain
+
+# register the credential for RootTAO
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+tir setAttributeData myIssuer.did vcRootTAO.reservedAttributeId vcRootTAO.vc
+conformance check rtao_register_verifiableauthorisationfortrustchain
+
+# request CTAAQualificationCredential
+ctaaQualification: conformance getCredential qualification
+conformance check request_ctaaqualificationcredential
+
+# ACCREDIT AND AUTHORIZE TESTS FINISHED!!

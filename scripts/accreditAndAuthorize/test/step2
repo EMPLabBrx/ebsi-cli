@@ -1,0 +1,18 @@
+# create a proxy
+conformance clientMockUpdateList 1 0 0
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+set proxyData {"prefix":"","headers":{},"testSuffix":"/credentials/status/1"}
+set proxyData.prefix myIssuer.clientId
+tir addIssuerProxy myIssuer.did proxyData
+proxies: tir get /issuers/ myIssuer.did /proxies
+set user.proxyId proxies.items.0.proxyId
+set user.accreditationUrl vcTI.url
+conformance clientMockInitiate
+
+# Go to https://api-test.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Issue & Revoke
+#   - Issue CTRevocable Credential with credentialStatus StatusList2021
+#   - Validate the issued credential details

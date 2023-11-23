@@ -1,0 +1,1081 @@
+[
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "baseDocument",
+            "type": "string"
+          }
+        ],
+        "name": "BaseDocumentUpdated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "controller",
+            "type": "string"
+          }
+        ],
+        "name": "ControllerAdded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "controller",
+            "type": "string"
+          }
+        ],
+        "name": "ControllerRevoked",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "baseDocument",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes",
+            "name": "publicKey",
+            "type": "bytes"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isSecp256k1",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notBefore",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "DidDocumentInserted",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint8",
+            "name": "version",
+            "type": "uint8"
+          }
+        ],
+        "name": "Initialized",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes",
+            "name": "publicKey",
+            "type": "bytes"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isSecp256k1",
+            "type": "bool"
+          }
+        ],
+        "name": "VerificationMethodAdded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "VerificationMethodExpired",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "VerificationMethodRevoked",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "bytes",
+            "name": "publicKey",
+            "type": "bytes"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isSecp256k1",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notBefore",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "oldVMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          }
+        ],
+        "name": "VerificationMethodRolled",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notBefore",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "VerificationRelationshipAdded",
+        "type": "event"
+      },
+      {
+        "inputs": [],
+        "name": "CONTROLLERS_DIAMOND_STORAGE_POSITION",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "DID_DOCUMENT_DIAMOND_STORAGE_POSITION",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "TSC_DIAMOND_STORAGE_POSITION",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "VRELATIONSHIPS_DIAMOND_STORAGE_POSITION",
+        "outputs": [
+          {
+            "internalType": "bytes32",
+            "name": "",
+            "type": "bytes32"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "controller",
+            "type": "string"
+          }
+        ],
+        "name": "addController",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "publicKey",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSecp256k1",
+            "type": "bool"
+          }
+        ],
+        "name": "addVerificationMethod",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notBefore",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "addVerificationRelationship",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "bytes",
+            "name": "did",
+            "type": "bytes"
+          },
+          {
+            "internalType": "address",
+            "name": "controller",
+            "type": "address"
+          }
+        ],
+        "name": "checkController",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "controller",
+            "type": "address"
+          }
+        ],
+        "name": "checkController",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "expireVerificationMethod",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          }
+        ],
+        "name": "getDidDocument",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "baseDocument",
+            "type": "string"
+          },
+          {
+            "internalType": "string[]",
+            "name": "controllers",
+            "type": "string[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "vMethodIds",
+            "type": "string[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bytes",
+                "name": "publicKey",
+                "type": "bytes"
+              },
+              {
+                "internalType": "bool",
+                "name": "isSecp256k1",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "revoked",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct DidDocumentStorage.VMethod[]",
+            "name": "vMethods",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "vMethodId",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "notBefore",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "notAfter",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "indexDid",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct DidDocumentStorage.VRelationship[]",
+            "name": "vRelationships",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "name": "getDidDocumentByTimestamp",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "baseDocument",
+            "type": "string"
+          },
+          {
+            "internalType": "string[]",
+            "name": "controllers",
+            "type": "string[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "vMethodIds",
+            "type": "string[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "bytes",
+                "name": "publicKey",
+                "type": "bytes"
+              },
+              {
+                "internalType": "bool",
+                "name": "isSecp256k1",
+                "type": "bool"
+              },
+              {
+                "internalType": "bool",
+                "name": "revoked",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct DidDocumentStorage.VMethod[]",
+            "name": "vMethods",
+            "type": "tuple[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "name",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "vMethodId",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "notBefore",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "notAfter",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "indexDid",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct DidDocumentStorage.VRelationship[]",
+            "name": "vRelationships",
+            "type": "tuple[]"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "page",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pageSize",
+            "type": "uint256"
+          }
+        ],
+        "name": "getDids",
+        "outputs": [
+          {
+            "internalType": "string[]",
+            "name": "items",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "total",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "howMany",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prev",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "next",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "controller",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "page",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pageSize",
+            "type": "uint256"
+          }
+        ],
+        "name": "getDidsByController",
+        "outputs": [
+          {
+            "internalType": "string[]",
+            "name": "items",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "total",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "howMany",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prev",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "next",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "page",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pageSize",
+            "type": "uint256"
+          }
+        ],
+        "name": "getDidsByVerificationRelationship",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "did",
+                "type": "string"
+              },
+              {
+                "internalType": "uint256",
+                "name": "notBefore",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "notAfter",
+                "type": "uint256"
+              }
+            ],
+            "internalType": "struct VRelationshipsStorage.DidWithPeriod[]",
+            "name": "items",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "total",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "howMany",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prev",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "next",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "v",
+            "type": "uint256"
+          }
+        ],
+        "name": "initialize",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "baseDocument",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "publicKey",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSecp256k1",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notBefore",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "insertDidDocument",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "controller",
+            "type": "string"
+          }
+        ],
+        "name": "revokeController",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          }
+        ],
+        "name": "revokeVerificationMethod",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "vMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "bytes",
+            "name": "publicKey",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bool",
+            "name": "isSecp256k1",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notBefore",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "notAfter",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "oldVMethodId",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "duration",
+            "type": "uint256"
+          }
+        ],
+        "name": "rollVerificationMethod",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "setRegistryAddresses",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_version",
+            "type": "uint256"
+          }
+        ],
+        "name": "setVersion",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "did",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "baseDocument",
+            "type": "string"
+          }
+        ],
+        "name": "updateBaseDocument",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "name": "version",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ]

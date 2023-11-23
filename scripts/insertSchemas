@@ -1,0 +1,26 @@
+# before running the script download the schemas and put them in scripts/local/schemas
+
+t1: load scripts/local/schemas/ebsi-attestation/2022-02/schema.json
+t2: load scripts/local/schemas/ebsi-presentation/2022-02/schema.json
+t3: load scripts/local/schemas/ebsi-muti-uni-pilot/education-verifiable-accreditation-records/2022-02/schema.json
+t4: load scripts/local/schemas/ebsi-accreditation/2022-02/schema.json
+t5: load scripts/local/schemas/ebsi-muti-uni-pilot/verifiable-attestation-individual-id/2022-02/schema.json
+t6: load scripts/local/schemas/ebsi-vid/legal-entity/2022-02/schema.json
+t7: load scripts/local/schemas/ebsi-vid/natural-person/2022-02/schema.json
+t8: load scripts/local/schemas/ebsi-vid/verifiable-authorisation/2022-02/schema.json
+
+set t3.allOf[0].$ref https://api-conformance.ebsi.eu/trusted-schemas-registry/v1/schemas/0x28d76954924d1c4747a4f1f9e3e9edc9ca965efbf8ff20e4339c2bf2323a5773
+set t4.allOf[0].$ref https://api-conformance.ebsi.eu/trusted-schemas-registry/v1/schemas/0x28d76954924d1c4747a4f1f9e3e9edc9ca965efbf8ff20e4339c2bf2323a5773
+set t5.allOf[0].$ref https://api-conformance.ebsi.eu/trusted-schemas-registry/v1/schemas/0x28d76954924d1c4747a4f1f9e3e9edc9ca965efbf8ff20e4339c2bf2323a5773
+set t6.allOf[0].$ref https://api-conformance.ebsi.eu/trusted-schemas-registry/v1/schemas/0x28d76954924d1c4747a4f1f9e3e9edc9ca965efbf8ff20e4339c2bf2323a5773
+set t7.allOf[0].$ref https://api-conformance.ebsi.eu/trusted-schemas-registry/v1/schemas/0x28d76954924d1c4747a4f1f9e3e9edc9ca965efbf8ff20e4339c2bf2323a5773
+set t8.allOf[0].$ref https://api-conformance.ebsi.eu/trusted-schemas-registry/v1/schemas/0x28d76954924d1c4747a4f1f9e3e9edc9ca965efbf8ff20e4339c2bf2323a5773
+
+proxyledger tsr insertSchema t1 {}
+proxyledger tsr insertSchema t2 {}
+proxyledger tsr insertSchema t3 {} # this schema is big, so the network should be configured to accept it
+proxyledger tsr insertSchema t4 {}
+proxyledger tsr insertSchema t5 {}
+proxyledger tsr insertSchema t6 {}
+proxyledger tsr insertSchema t7 {}
+proxyledger tsr insertSchema t8 {}

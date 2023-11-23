@@ -1,0 +1,21 @@
+# load tao
+using user null
+using user ES256K did1 PRIVATE_KEY_ES256K_TAO DID_TAO
+using user ES256 did1 PRIVATE_KEY_ES256_TAO DID_TAO
+set taoPrivateKeyES256K user.privateKeyHex
+set taoPrivateKeyES256 user.keys.ES256.privateKeyJwk
+set taoDid user.did
+
+# create accreditation to attest
+payloadVcTI: load scripts/assets/VerifiableAccreditationToAttest.json
+set payloadVcTI.issuer taoDid
+set payloadVcTI.credentialSubject.id NEW_ISSUER_DID
+set payloadVcTI.credentialSchema.id CREDENTIAL_SCHEMA_ID
+set payloadVcTI.termsOfUse.id ACCREDITATION_TAO
+vcTI: compute createVcJwt payloadVcTI {} ES256
+
+# preregister the new issuer
+tTao: authorisation auth tir_write_presentation ES256K
+using token tTao.access_token
+attributeIdTI: compute randomID
+tir setAttributeMetadata NEW_ISSUER_DID attributeIdTI ti taoDid ACCREDITATION_ID_TAO

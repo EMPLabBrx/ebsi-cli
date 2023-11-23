@@ -1,0 +1,123 @@
+// Define variable
+def ENV_FILES = ""
+def DONTENV_COMMAND = "dotenv -f"
+def YARN_TEST_COMMAND = "yarn test:"
+
+pipeline {
+    agent any
+    options {
+        skipDefaultCheckout()
+    }
+    parameters {
+        extendedChoice(type: 'PT_SINGLE_SELECT', value: 'test,pilot,conformance ', visibleItemCount: 3, multiSelectDelimiter: ',', name: 'environment', quoteValue: false, saveJSONParameterToFile: false, description: 'This select contain all the available enviroments:')
+        extendedChoice(type: 'PT_RADIO', descriptionPropertyValue: 'eu', value: 'eu', defaultValue: 'eu', visibleItemCount: 1, multiSelectDelimiter: ',', name: 'node', quoteValue: false, saveJSONParameterToFile: false, description: 'IMPORTANT: These values should be used only when the selected environment are "PILOT" or "CONFORMANCE". For "CONFORMANCE" environment there is only one available node "eu".\nThis list contain all the available nodes:')
+        extendedChoice(type: 'PT_CHECKBOX', descriptionPropertyValue: 'essentials,did,timestamp,tsr,tir,tar,tpr,notifications,datahub,storage,ledger,onboarding,authorisation,conformance', value: 'essentials,did,timestamp,tsr,tir,tar,tpr,notifications,datahub,storage,ledger,onboarding,authorisation,conformance', defaultValue: 'essentials,did,timestamp,tsr,tir,tar,tpr,notifications,datahub,storage,ledger,onboarding,authorisation,conformance', visibleItemCount: 15, name: 'test_suite', multiSelectDelimiter: ',', quoteValue: false, saveJSONParameterToFile: false, description: 'This list of checks contain all the available test-suites:')
+        string(name: 'Testing_Variables_Branch', defaultValue: 'main', description: 'Branch from testing variables project that we will use on the execution.')
+    }
+    environment {
+        PROXY=credentials('PROXY_TEST')
+        TIMEOUT_MINING='15000'
+        userTest=credentials('userTest')
+
+        // This environment varibales are commented because we don't know if they are neccesary
+        /*PILOT_ONBOARDING_API_PRIVATE_KEY=credentials('PILOT_ONBOARDING_API_PRIVATE_KEY')
+        PILOT_RESOURCE_APP_NAME='test-app-pilot1'
+        PILOT_RESOURCE_APP_ID='0x53a8c7f9f97252eed6c89d14ea4d94c3f31a90183a93fb4e4e34d66a3dea7f4f'
+        PILOT_REQUESTER_APP_NAME='test-app-pilot2'
+        PILOT_REQUESTER_APP_ID='0x9a15eee626fac031b5ca1b8bcd66b9c50072328b9df3e78b1c68751a9cc7f32b'
+        PILOT_REQUESTER_APP_PRIVATE_KEY=credentials('PILOT_REQUESTER_APP_PRIVATE_KEY')
+        PILOT_ADMIN_DID='did:ebsi:zgUB1p2zNmGtymUwzHrxh24'
+        PILOT_ISSUER_1_DID='did:ebsi:zx2HV59LRE3wFRcx5SHAMMo'
+        PILOT_USER_1_DID='did:ebsi:zbM8cCuoBMFNLeQyLiVFyxw'
+        PILOT_USER_1_PRIVATE_KEY=credentials('PILOT_USER_1_PRIVATE_KEY')
+        PILOT_USER_1_PRIVATE_KEY_JWK_ES256_BASE64=credentials('PILOT_USER_1_PRIVATE_KEY_JWK_ES256_BASE64')
+        PILOT_USER_1_PRIVATE_KEY_JWK_RS256_BASE64=credentials('PILOT_USER_1_PRIVATE_KEY_JWK_RS256_BASE64')
+        PILOT_USER_1_PRIVATE_KEY_JWK_EDDSA_BASE64=credentials('PILOT_USER_1_PRIVATE_KEY_JWK_EDDSA_BASE64')
+        PILOT_USER_1_ES256K_KEY_ID='keys-1'
+        PILOT_USER_1_ES256_KEY_ID='keys-2'
+        PILOT_USER_1_RS256_KEY_ID='keys-3'
+        PILOT_USER_1_EDDSA_KEY_ID='keys-4'
+        PILOT_USER_2_DID='did:ebsi:zs1u3cW1oxPmeMeu4qw6Y5v'
+        PILOT_USER_2_KEY_ID='keys-1'
+        PILOT_USER_2_PRIVATE_KEY=credentials('PILOT_USER_2_PRIVATE_KEY')
+        PILOT_USER_3_DID='did:ebsi:zctxYvHNaLjdosZCG5gMiTZ'
+        PILOT_USER_3_KEY_ID='keys-1'
+        PILOT_USER_3_PRIVATE_KEY=credentials('PILOT_USER_3_PRIVATE_KEY')*/
+    }
+    stages {
+        stage('Environment') {
+            steps {
+                script {
+                    env.DOMAIN = "https://api-${params.environment}.ebsi.${params.node}"
+                    env.EBSI_ENV = params.environment
+
+                    if (params.environment == 'test') {
+                        env.BRANCH = 'main'
+                    }else if(params.environment == 'conformance' || params.environment == 'pilot') {
+                        env.BRANCH = 'staging'
+                    }
+                    env.ENV_FILES="$WORKSPACE/${env.EBSI_ENV}/.env,$WORKSPACE/${env.EBSI_ENV}/test-scripts.env"
+                }
+            }
+        }
+        stage('Checkout variables'){
+            steps {
+               checkout poll: false,
+                    scm: [$class: 'GitSCM',
+                            branches: [[name: "${params.Testing_Variables_Branch}"]],
+                            doGenerateSubmoduleConfigurations: false,
+                            extensions: [],
+                            submoduleCfg: [],
+                            userRemoteConfigs: [[url: 'https://ebsi1-robot@ec.europa.eu/digital-building-blocks/code/scm/ebsi/testing-variables.git', credentialsId: 'b257a49a-5fed-4971-a6df-e05d3200edc0']]]
+            }
+        }
+        stage('Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: env.BRANCH]],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[
+                        $class: 'RelativeTargetDirectory',
+                        relativeTargetDir: 'test-scripts'
+                    ]],
+                    submoduleCfg: [],
+                    userRemoteConfigs: scm.userRemoteConfigs
+                ])
+            }
+        }
+        stage('Setup') {
+            steps {
+                dir('test-scripts') {
+                    nodejs(nodeJSInstallationName: '16.17.1') {
+                        sh 'yarn install --ignore-engines'
+                    }
+                }
+            }
+        }
+        stage('Tests') {
+            steps {
+                dir('test-scripts') {
+                    script {
+                        echo "Execution started in the environment ${params.environment} using the domain ${env.DOMAIN}"
+                        params.test_suite.trim().split(',').each { testSuite ->
+                            stage ("${testSuite}"){
+                                catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                                    sh "${DONTENV_COMMAND} \"${env.ENV_FILES}\" ${YARN_TEST_COMMAND}${testSuite}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        failure {
+            slackSend (channel: '#jenkins_tests_notifications', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }
+        always {
+            cleanWs()
+        }
+    }
+}

@@ -1,0 +1,13 @@
+# register first part of DID document
+resAuthDIDRInvite: authorisation auth didr_invite_presentation ES256 $1
+using token resAuthDIDRInvite.access_token
+
+did insertDidDocument
+
+# complete DID document
+resAuthDIDRWrite: authorisation auth didr_write_presentation ES256K
+using token resAuthDIDRWrite.access_token
+
+did addVerificationMethod user.did ES256
+did addVerificationRelationship user.did authentication ES256
+did addVerificationRelationship user.did assertionMethod ES256

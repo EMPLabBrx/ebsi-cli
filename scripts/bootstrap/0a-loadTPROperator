@@ -1,0 +1,5 @@
+# Script to load the admin with the ROLE OPERATOR in the Trusted Apps Registry
+# This role is granted by the multisignature wallet
+env SET_ENV
+using user null
+using user ES256K did1 PRIVATE_KEY_TPR_OPERATOR DID_TPR_OPERATOR

@@ -1,0 +1,6 @@
+# Script to load a user with admin attributes in the Trusted Policies Registry
+# (example: "TIR:insertIssuer" -> attribute to insert issuers in the Trusted Issuers Registry)
+env SET_ENV
+using user null
+using user ES256K did1 PRIVATE_KEY_ES256K_SUPPORT_OFFICE DID_SUPPORT_OFFICE
+using user ES256 did1 PRIVATE_KEY_ES256_SUPPORT_OFFICE DID_SUPPORT_OFFICE

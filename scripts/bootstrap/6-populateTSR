@@ -1,0 +1,22 @@
+# before running the script download the schemas and put them in scripts/local/schemas
+run bootstrap/0b-loadAdmin
+
+attestation_2022-11: load scripts/local/schemas/ebsi-attestation/2022-11/schema.json
+attestation_2022-11_01: load scripts/local/schemas/ebsi-attestation/2022-11_01/schema.json
+id_attestation_2022-11_01: compute schemaId attestation_2022-11_01
+presentation_2022-11: load scripts/local/schemas/ebsi-presentation/2022-11/schema.json
+
+accreditation_2022-11_01: load scripts/local/schemas/ebsi-accreditation/2022-11_01/schema.json
+set accreditation_2022-11_01.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+
+accreditation_2023-04: load scripts/local/schemas/ebsi-accreditation/2023-04-11/schema.json
+set accreditation_2023-04.allOf.0.$ref SET_DOMAIN /trusted-schemas-registry/v3/schemas/ id_attestation_2022-11_01
+
+proxyledger tsr insertSchema attestation_2022-11 {}
+proxyledger tsr insertSchema attestation_2022-11_01 {}
+
+# skip these commands for later if TSR API v3 is not ready
+proxyledger tsr insertSchema accreditation_2022-11_01 {}
+proxyledger tsr insertSchema accreditation_2023-04 {}
+
+# the rest of the schemas can be inserted from the json-schema repository

@@ -1,0 +1,10 @@
+# way of use:
+# ==> set domain https://api-test.ebsi.eu
+# ==> run issue_VerifiableAuthorisationToOnboard <didIssuer> <didSubject> <issuerAttributeIdUrl>
+
+payloadVcOnboard: load scripts/assets/VerifiableAuthorisationToOnboard.json
+set payloadVcOnboard.issuer $1
+set payloadVcOnboard.credentialSubject.id $2
+set payloadVcOnboard.termsOfUse.id $3
+set payloadVcOnboard.credentialSchema.id domain /trusted-schemas-registry/v2/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM
+compute createVcJwt payloadVcOnboard {} ES256

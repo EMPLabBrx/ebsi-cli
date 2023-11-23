@@ -1,0 +1,67 @@
+## Insert generic apps
+proxyledger tar insertApp ledger-api
+proxyledger tar insertApp did-registry-api
+proxyledger tar insertApp timestamp-api
+proxyledger tar insertApp trusted-issuers-registry-api
+proxyledger tar insertApp trusted-policies-registry-api
+proxyledger tar insertApp trusted-schemas-registry-api
+proxyledger tar insertApp storage-api
+proxyledger tar insertApp notifications-api
+proxyledger tar insertApp proxy-data-hub-api
+proxyledger tar insertApp ebsi-core-services
+proxyledger tar insertApp authorisation-api
+
+
+## Insert specific apps
+proxyledger tar insertApp did-registry-api_conformance-ebsi-01
+proxyledger tar insertApp timestamp-api_conformance-ebsi-01
+proxyledger tar insertApp trusted-issuers-registry-api_conformance-ebsi-01
+proxyledger tar insertApp trusted-policies-registry-api_conformance-ebsi-01
+proxyledger tar insertApp trusted-schemas-registry-api_conformance-ebsi-01
+proxyledger tar insertApp notifications-api_conformance-ebsi-01
+proxyledger tar insertApp proxy-data-hub-api_conformance-ebsi-01
+proxyledger tar insertApp authorisation-api_conformance-ebsi-01
+proxyledger tar insertApp users-onboarding-api_conformance-ebsi-01
+
+
+## Authorizations between apps
+
+# APIs that need to access the blockchain through ledger-api
+#   Note: trusted-apps-registry-api doesn't require
+#   authorization because it connects directly to besu
+proxyledger tar insertAuthorization ledger-api did-registry-api
+proxyledger tar insertAuthorization ledger-api timestamp-api
+proxyledger tar insertAuthorization ledger-api trusted-issuers-registry-api
+proxyledger tar insertAuthorization ledger-api trusted-policies-registry-api
+proxyledger tar insertAuthorization ledger-api trusted-schemas-registry-api
+
+# APIs that need to access cassandra through storage-api
+proxyledger tar insertAuthorization storage-api notifications-api
+proxyledger tar insertAuthorization storage-api proxy-data-hub-api
+
+# With regarding users, each API will authorize tokens issued by
+# authorisation-api, and the set of API is defined as ebsi-core-services
+proxyledger tar insertAuthorization ebsi-core-services authorisation-api
+
+
+## Define public keys for APIs using the old version
+proxyledger tar insertAppPublicKey 0x8d508a564259616f0f035a5ac6b5f8c3f4223163261b2b3a07c8f3df9b08cbdd SET-PRIVATE-OR-PUBLIC-KEY # did-registry-api
+proxyledger tar insertAppPublicKey 0xee52082af8acb4a3d78b668bb6ec2809e58e2b5c0c6612c92d872e18289951fc SET-PRIVATE-OR-PUBLIC-KEY # timestamp-api
+proxyledger tar insertAppPublicKey 0x1795ede2b64392744b86bcf7d5af61aa783def0dbab758ed3b2670d6be130268 SET-PRIVATE-OR-PUBLIC-KEY # trusted-issuers-registry-api
+proxyledger tar insertAppPublicKey 0xbeed83fa6ecc88546cb8cba6c370ad12b1136fc54cb347b583adf8446594d33f SET-PRIVATE-OR-PUBLIC-KEY # trusted-policies-registry-api
+proxyledger tar insertAppPublicKey 0x462230ee44ba7f75752d829e359f7fc6dc495038440a0767e62d93dc30c98c47 SET-PRIVATE-OR-PUBLIC-KEY # trusted-schemas-registry-api
+proxyledger tar insertAppPublicKey 0xb2317e0eec5efd96eccace2740b31850a437189caa378e5ca162a86e3a6379f8 SET-PRIVATE-OR-PUBLIC-KEY # notifications-api
+proxyledger tar insertAppPublicKey 0xaf06f0c2b3fc140dd3d461e073aa9588806a48e3e54c6f5a3caa99fa8f6e6167 SET-PRIVATE-OR-PUBLIC-KEY # proxy-data-hub-api
+proxyledger tar insertAppPublicKey 0x559c4f32dc35566e4b92b697499c38f3847a6c53f8344821c24354ead1f2ab1e SET-PRIVATE-OR-PUBLIC-KEY # authorisation-api
+
+
+## Define public keys for APIs using the latest version
+proxyledger tar insertAppPublicKey 0x9a552bcb1ca4675c2e3b738bddf503bb526972a527c24f16c7f61b7be52d2f6c SET-PRIVATE-OR-PUBLIC-KEY # did-registry-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0x1c1c772b5f35e4cfc87fa66cb24530a39bca4cfa171ce887875cbf3d9973ad84 SET-PRIVATE-OR-PUBLIC-KEY # timestamp-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0x238ab586153cbe67e1fab699984c2a7bb07cd89667e91ffddb587a8d1e7f8de7 SET-PRIVATE-OR-PUBLIC-KEY # trusted-issuers-registry-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0x471b22674b897cbeb716c66f28c482345e38a1d7db0fa8252c6c53ffa0de6c6e SET-PRIVATE-OR-PUBLIC-KEY # trusted-policies-registry-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0x726d39090f77d46484ceeb40a68dd3906fda2855dfa0e7633a58dfb141cf9e3a SET-PRIVATE-OR-PUBLIC-KEY # trusted-schemas-registry-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0xd129f5e97a000187a817c2c5a7e7b339c39b477ae5de9f29629b6a463fd3f33d SET-PRIVATE-OR-PUBLIC-KEY # notifications-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0x1042b4e6628e275f8caf3c084e9ce4db0c0e28eb4e6f18154ce1dc4f7311bcb7 SET-PRIVATE-OR-PUBLIC-KEY # proxy-data-hub-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0xc893e8a742f8f0f5d404d36c26ac9b207692f4ce146309bef99d3a1bfaef33ee SET-PRIVATE-OR-PUBLIC-KEY # authorisation-api_conformance-ebsi-01
+proxyledger tar insertAppPublicKey 0x26c72574a17d99da44adef19990acd30452125bd291919e93bdd0e4544b2abb9 SET-PRIVATE-OR-PUBLIC-KEY # users-onboarding-api_conformance-ebsi-01

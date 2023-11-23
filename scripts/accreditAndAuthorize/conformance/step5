@@ -1,0 +1,13 @@
+# revoke credential issued to subaccount
+subaccount: compute subaccountDid myIssuer.did
+attributes: tir get /issuers/ subaccount /attributes
+t: authorisation auth tir_write_presentation ES256
+using token t.access_token
+tir setAttributeMetadata subaccount attributes.items.0.id revoked myIssuer.did vcTAO.reservedAttributeId
+tir setAttributeMetadata subaccount attributes.items.1.id revoked myIssuer.did vcTAO.reservedAttributeId
+
+# Go to https://api-conformance.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Revoke accreditations from sub-account DID
+#   - Revoke accreditations from sub-account DID

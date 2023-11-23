@@ -1,0 +1,35 @@
+env test
+set domain https://api-test.ebsi.eu
+
+# create new issuer
+using user null
+using user
+using user ES256
+
+# request credential to onboard
+vcOnboard: conformance getCredential onboard
+set myIssuer user
+
+# register did document
+run registerDidDocument_ES256K_ES256 vcOnboard.vc
+
+# request VerifiableAccreditationToAttest (TI)
+vcTI: conformance getCredential ti
+
+# register the credential for TI
+t: authorisation auth tir_invite_presentation ES256 vcTI.vc
+using token t.access_token
+tir setAttributeData myIssuer.did vcTI.reservedAttributeId vcTI.vc
+set vcTI.url https://api-test.ebsi.eu/trusted-issuers-registry/v4/issuers/ myIssuer.did /attributes/ vcTI.reservedAttributeId
+
+view myIssuer
+# Go to https://api-test.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Onboarding
+#   - Request VerifiableAuthorisationToOnboard
+#   - Register your DID Document into the DID Registry
+# 
+# - Get accredited as a Trusted Issuer
+#   - Request VerifiableAccreditationToAttest
+#   - Register VerifiableAccreditationToAttest into the Trusted Issuers Registry

@@ -1,0 +1,27 @@
+using user ES256 did2
+set user.issuerState issuer-state
+conformance clientMockInitiate
+
+jwks: conformance get /issuer-mock/jwks
+issuerMockDidNP: compute did2 jwks.keys.0
+
+set preAuthPayload {"authorization_details":[{"type":"openid_credential","format":"jwt_vc","types":["VerifiableCredential","VerifiableAttestation","CTWalletSamePreAuthorised"],"locations":[""]}]}
+set preAuthPayload.iss user.clientId
+set preAuthPayload.sub issuerMockDidNP
+set preAuthPayload.client_id issuerMockDidNP
+set preAuthPayload.authorization_details[0].locations[0] user.clientId
+set preAuthHeaders {}
+set preAuthHeaders.kid user.keys.ES256.id
+preAuthorizedCode: compute signJwt preAuthPayload ES256 preAuthHeaders
+userPin: compute userPin issuerMockDidNP
+
+conformance check issue_to_holder_initiate_ct_wallet_same_in_time
+conformance check issue_to_holder_validate_ct_wallet_same_in_time
+conformance check issue_to_holder_initiate_ct_wallet_same_deferred
+conformance check issue_to_holder_validate_ct_wallet_same_deferred
+conformance check issue_to_holder_initiate_ct_wallet_same_pre_authorised preAuthorizedCode userPin
+conformance check issue_to_holder_validate_ct_wallet_same_pre_authorised preAuthorizedCode userPin
+
+compute wait 11
+conformance holder CTIssueQualificationCredential inTime ES256 empty skip-credential-offer
+conformance check request_ct_issue_to_holder_qualification_credential

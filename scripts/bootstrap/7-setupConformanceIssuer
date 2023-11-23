@@ -1,0 +1,35 @@
+# create keys for conformance
+using user null
+using user ES256K did1
+using user ES256 did1 user.privateKeyHex
+set confIssuer user
+
+# register conformance in the DID Registry
+proxyledger did-new insertDidDocument
+proxyledger did-new addVerificationMethod user.did ES256
+proxyledger did-new addVerificationRelationship user.did authentication ES256
+proxyledger did-new addVerificationRelationship user.did assertionMethod ES256
+
+# conformance service can authorize Root TAOs then it needs to be registered in TPR
+run bootstrap/0a-loadTPROperator
+proxyledger tpr-new insertUserAttributes confIssuer.address ["TIR:setAttributeMetadata"]
+using user confIssuer
+
+# registration in the TIR
+reservedAttributeId: compute randomID
+vc: run new/issue_SelfAttestationSupportOffice user.did reservedAttributeId
+proxyledger tir-new setAttributeMetadata user.did reservedAttributeId roottao
+proxyledger tir-new setAttributeData user.did reservedAttributeId vc
+
+# register a proxy
+set proxyData {"prefix":"","headers":{},"testSuffix":"/credentials/status/1"}
+set proxyData.prefix SET_CONFORMANCE_DOMAIN /conformance/v4/issuer-mock
+proxyledger tir-new addIssuerProxy user.did proxyData
+proxyId: compute sha256 proxyData
+
+set user.accreditationUrl SET_DOMAIN /trusted-issuers-registry/v5/issuers/ user.did /attributes/ reservedAttributeId
+set proxyUrl SET_DOMAIN /trusted-issuers-registry/v5/issuers/ user.did /proxies/ proxyId
+set user.proxyId proxyId
+
+view user
+view proxyUrl

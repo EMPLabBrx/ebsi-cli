@@ -1,0 +1,11 @@
+# way of use:
+# ==> set domain https://api-test.ebsi.eu
+# ==> run new/issue_SelfAttestationSupportOffice <didIssuer> <reservedAttributeId>
+
+payloadVc: load scripts/assets/CredentialToAttestVerifiableAuthorisationForTrustChain.json
+set payloadVc.issuer $1
+set payloadVc.credentialSubject.id $1
+set payloadVc.credentialSubject.accreditedFor[0].schemaId domain /trusted-schemas-registry/v3/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM
+set payloadVc.credentialSchema.id domain /trusted-schemas-registry/v3/schemas/zjVFNvbEBPAr3a724DttioZpgZmNr75BBtRzZqk7pkDe
+set payloadVc.credentialSubject.reservedAttributeId $2
+compute createVcJwt payloadVc {} ES256

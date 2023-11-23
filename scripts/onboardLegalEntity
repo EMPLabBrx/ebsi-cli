@@ -1,0 +1,40 @@
+# new legal entity
+using user null
+using user ES256K
+set lePrivateKey user.privateKeyHex
+set leDid user.did
+
+# load issuer
+using user null
+using user ES256K did1 PRIVATE_KEY_ES256K_ISSUER DID_ISSUER
+using user ES256 did1 PRIVATE_KEY_ES256_ISSUER DID_ISSUER
+set issuerPrivateKeyES256K user.privateKeyHex
+set issuerPrivateKeyES256 user.keys.ES256.privateKeyJwk
+set issuerDid user.did
+
+payloadVc: load scripts/assets/VerifiableAuthorisationToOnboard.json
+set payloadVc.issuer issuerDid
+set payloadVc.credentialSubject.id leDid
+set payloadVc.credentialSchema.id https://api-pilot.ebsi.eu/trusted-schemas-registry/v2/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM
+set payloadVc.termsOfUse.id URL_ISSUER_ACCREDITATION
+vcToOnboard: compute createVcJwt payloadVc {} ES256
+
+using user null
+using user ES256K did1 lePrivateKey leDid
+
+# register DID document
+openidconf: authorisation get /.well-known/openid-configuration
+vpJwt1: compute createPresentationJwt vcToOnboard ES256K openidconf.issuer
+t1: authorisation token didr_invite_presentation vpJwt1
+using token t1.access_token
+
+did insertDidDocument
+
+# complete DID document
+vpJwt2: compute createPresentationJwt empty ES256K openidconf.issuer
+t2: authorisation token didr_write_presentation vpJwt2
+using token t2.access_token
+
+did addVerificationRelationship user.did assertionMethod ES256K
+
+did get /identifiers/ leDid

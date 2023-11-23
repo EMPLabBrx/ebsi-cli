@@ -1,0 +1,5 @@
+proxyledger did setTrustedPoliciesRegistryAddress
+proxyledger tar setRegistryAddresses
+proxyledger timestamp setTrustedPoliciesRegistryAddress
+proxyledger tir setRegistryAddresses
+proxyledger tsr setTrustedPoliciesRegistryAddress

@@ -1,0 +1,1127 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_tprAddress",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "hashId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "ianaNameHash",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "outputLength",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "oid",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum HashAlgoStorage.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "multiHash",
+        "type": "string"
+      }
+    ],
+    "name": "AddNewHashAlgo",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewVersion",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32[]",
+        "name": "timestampIds",
+        "type": "bytes32[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "versionInfoHash",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RecordedHashes",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "versionHash",
+        "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32[]",
+        "name": "timestampIds",
+        "type": "bytes32[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes",
+        "name": "versionInfo",
+        "type": "bytes"
+      }
+    ],
+    "name": "TimestampVersionHashes",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bytes32[]",
+        "name": "timestampIds",
+        "type": "bytes32[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes[]",
+        "name": "timestampData",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "TimestampedHashes",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "hashId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "ianaNameHash",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "ianaName",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "outputLength",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "oid",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum HashAlgoStorage.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "multiHash",
+        "type": "string"
+      }
+    ],
+    "name": "UpdateHashAlgo",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "TS_DIAMOND_STORAGE_POSITION",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "TS_HASHALGO_DIAMOND_STORAGE_POSITION",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "TS_RECORD_DIAMOND_STORAGE_POSITION",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "versionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "timestampData",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "versionInfo",
+        "type": "bytes"
+      }
+    ],
+    "name": "appendRecordVersionHashes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "versionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "hashValue",
+        "type": "bytes"
+      }
+    ],
+    "name": "detachRecordVersionHash",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "hashAlgorithmId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getHashAlgorithmById",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "outputLength",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "ianaName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "oid",
+        "type": "string"
+      },
+      {
+        "internalType": "enum HashAlgoStorage.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "multiHash",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "page",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pageSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "getHashAlgorithms",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "items",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "howMany",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "prev",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "next",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRecord",
+    "outputs": [
+      {
+        "internalType": "string[]",
+        "name": "ownerIds",
+        "type": "string[]"
+      },
+      {
+        "internalType": "string[]",
+        "name": "revokedOwnerIds",
+        "type": "string[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalVersions",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "page",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pageSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRecordIds",
+    "outputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "items",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "howMany",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "prev",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "next",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "hashValue",
+        "type": "bytes"
+      },
+      {
+        "internalType": "uint256",
+        "name": "page",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pageSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRecordIdsByFirstVersionHash",
+    "outputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "items",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "howMany",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "prev",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "next",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "ownerId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "page",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pageSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRecordIdsByOwnerId",
+    "outputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "items",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "howMany",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "prev",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "next",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "ownerId",
+        "type": "string"
+      }
+    ],
+    "name": "getRecordOwnerInfo",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "revoked",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256",
+        "name": "notBefore",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "notAfter",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "versionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "page",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pageSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "getRecordVersion",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes32[]",
+        "name": "infoIds",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "howMany",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "prev",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "next",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "versionInfoId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRecordVersionInfo",
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "info",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "hashValue",
+        "type": "bytes"
+      }
+    ],
+    "name": "getTimestamp",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "algorithm",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes",
+            "name": "value",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct TimestampStorage.Hash",
+        "name": "hash",
+        "type": "tuple"
+      },
+      {
+        "internalType": "address",
+        "name": "timestampedBy",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "blockNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "timestampId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getTimestampById",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "algorithm",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes",
+            "name": "value",
+            "type": "bytes"
+          }
+        ],
+        "internalType": "struct TimestampStorage.Hash",
+        "name": "hash",
+        "type": "tuple"
+      },
+      {
+        "internalType": "address",
+        "name": "timestampedBy",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "blockNumber",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "page",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "pageSize",
+        "type": "uint256"
+      }
+    ],
+    "name": "getTimestamps",
+    "outputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "items",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "uint256",
+        "name": "total",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "howMany",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "prev",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "next",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "v",
+        "type": "uint256"
+      }
+    ],
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "outputLength",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "ianaName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "oid",
+        "type": "string"
+      },
+      {
+        "internalType": "enum HashAlgoStorage.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "multiHash",
+        "type": "string"
+      }
+    ],
+    "name": "insertHashAlgorithm",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "ownerId",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "notBefore",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "notAfter",
+        "type": "uint256"
+      }
+    ],
+    "name": "insertRecordOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "versionId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "versionInfo",
+        "type": "bytes"
+      }
+    ],
+    "name": "insertRecordVersionInfo",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "policyRegistryContract",
+    "outputs": [
+      {
+        "internalType": "contract IPolicyRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "ownerId",
+        "type": "string"
+      }
+    ],
+    "name": "revokeRecordOwner",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "timestampData",
+        "type": "bytes[]"
+      }
+    ],
+    "name": "timestampHashes",
+    "outputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "timestampIds",
+        "type": "bytes32[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "timestampData",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "versionInfo",
+        "type": "bytes"
+      }
+    ],
+    "name": "timestampRecordHashes",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "recordId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "timestampData",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "versionInfo",
+        "type": "bytes"
+      }
+    ],
+    "name": "timestampRecordVersionHashes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes",
+        "name": "versionHash",
+        "type": "bytes"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "hashAlgorithmIds",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "hashValues",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes[]",
+        "name": "timestampData",
+        "type": "bytes[]"
+      },
+      {
+        "internalType": "bytes",
+        "name": "versionInfo",
+        "type": "bytes"
+      }
+    ],
+    "name": "timestampVersionHashes",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "hashAlgorithmId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "outputLength",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "ianaName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "oid",
+        "type": "string"
+      },
+      {
+        "internalType": "enum HashAlgoStorage.Status",
+        "name": "status",
+        "type": "uint8"
+      },
+      {
+        "internalType": "string",
+        "name": "multiHash",
+        "type": "string"
+      }
+    ],
+    "name": "updateHashAlgorithm",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "version",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

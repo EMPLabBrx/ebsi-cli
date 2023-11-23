@@ -1,0 +1,9 @@
+# revoke credential
+statusListIndex: compute statusListIndex did:ebsi:zhJARjPN69cEtgPxHen1Mid
+conformance clientMockUpdateList 1 statusListIndex 1
+
+# Go to https://api-conformance.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Issue & Revoke
+#   - Revoke the credential and confirm

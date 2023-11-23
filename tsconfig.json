@@ -1,0 +1,20 @@
+{
+  "extends": "@tsconfig/node18/tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "sourceMap": true,
+    "incremental": true,
+    "strict": false,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "allowJs": true
+  },
+  "include": ["src/**/*", "./global.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

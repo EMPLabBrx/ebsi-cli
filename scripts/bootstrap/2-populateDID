@@ -1,0 +1,21 @@
+# DID of TPR Role Operator
+run bootstrap/0a-loadTPROperator
+proxyledger did insertDidDocument
+proxyledger did addVerificationMethod user.did ES256
+proxyledger did addVerificationRelationship user.did authentication ES256
+proxyledger did addVerificationRelationship user.did assertionMethod ES256
+
+# DID admin
+run bootstrap/0b-loadAdmin
+proxyledger did insertDidDocument
+proxyledger did addVerificationMethod user.did ES256
+proxyledger did addVerificationRelationship user.did authentication ES256
+proxyledger did addVerificationRelationship user.did assertionMethod ES256
+
+# DID users-onboarding-api_pilot-temp-01
+using user null
+using user ES256K did1 <PRIVATE-KEY> <DID>
+proxyledger did insertDidDocument
+proxyledger did addVerificationMethod user.did ES256
+proxyledger did addVerificationRelationship user.did authentication ES256
+proxyledger did addVerificationRelationship user.did assertionMethod ES256

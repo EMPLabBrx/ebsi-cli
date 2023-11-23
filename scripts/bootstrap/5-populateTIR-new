@@ -1,0 +1,9 @@
+run bootstrap/0b-loadAdmin
+
+# support office
+set domain SET_DOMAIN
+reservedAttributeId: compute randomID
+vc: run new/issue_SelfAttestationSupportOffice user.did reservedAttributeId
+proxyledger tir-new setAttributeMetadata user.did reservedAttributeId roottao
+proxyledger tir-new setAttributeData user.did reservedAttributeId vc
+

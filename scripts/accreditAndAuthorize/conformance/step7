@@ -1,0 +1,7 @@
+# request CTAAQualificationCredential
+ctaaQualification: conformance getCredential qualification
+
+# Go to https://api-conformance.ebsi.eu/docs/wallet-conformance/accredit-authorise/flow
+# and validate the following tests:
+# 
+# - Request CTAAQualificationCredential from Conformance Issuer

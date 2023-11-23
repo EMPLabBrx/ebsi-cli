@@ -1,0 +1,43 @@
+env SET-ENVIRONMENT
+using user ES256K did1 PRIVATE-KEY-ACCOUNT-WITH-ROLE-OPERATOR
+
+
+# New Policies
+
+# DID
+proxyledger tpr insertPolicy DIDR:insertHashAlgorithm true ["insertHashAlgorithm in DID Registry"]
+proxyledger tpr insertPolicy DIDR:updateHashAlgorithm true ["updateHashAlgorithm in DID Registry"]
+
+#TIR
+proxyledger tpr insertPolicy TIR:insertIssuer true ["insertIssuer in Trusted Issuers Registry"]
+proxyledger tpr insertPolicy TIR:updateIssuer true ["updateIssuer in Trusted Issuers Registry"]
+proxyledger tpr insertPolicy TIR:setAttributeMetadata true ["setAttributeMetadata in Trusted Issuers Registry"]
+
+#Timestamp
+proxyledger tpr insertPolicy TS:insertHashAlgorithm true ["insertHashAlgorithm in Timestamp"]
+proxyledger tpr insertPolicy TS:updateHashAlgorithm true ["updateHashAlgorithm in Timestamp"]
+
+#TSR
+proxyledger tpr insertPolicy TSR:insertSchema true ["insertSchema in Trusted Schemas Registry"]
+proxyledger tpr insertPolicy TSR:updateSchema true ["updateSchema in Trusted Schemas Registry"]
+proxyledger tpr insertPolicy TSR:updateMetadata true ["updateMetadata in Trusted Schemas Registry"]
+
+#TAR
+proxyledger tpr insertPolicy TAR:insertApp true ["insertApp in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:insertRevocation true ["insertRevocation in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:updateApp true ["updateApp in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:insertAppInfo true ["insertAppInfo in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:insertAuthorization true ["insertAuthorization in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:updateAuthorization true ["updateAuthorization in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:insertAppPublicKey true ["insertAppPublicKey in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:updateAppPublicKey true ["updateAppPublicKey in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:insertAppAdministrator true ["insertAppAdministrator in Trusted Apps Registry"]
+proxyledger tpr insertPolicy TAR:deleteAppAdministrator true ["deleteAppAdministrator in Trusted Apps Registry"]
+
+
+# User Attributes
+proxyledger tpr insertUserAttributes SET-ETH-ADDRESS ["DIDR:insertHashAlgorithm", "DIDR:updateHashAlgorithm"] [true, true]
+proxyledger tpr insertUserAttributes SET-ETH-ADDRESS ["TIR:insertIssuer", "TIR:updateIssuer"] [true, true]
+proxyledger tpr insertUserAttributes SET-ETH-ADDRESS ["TS:insertHashAlgorithm", "TS:updateHashAlgorithm"] [true, true]
+proxyledger tpr insertUserAttributes SET-ETH-ADDRESS ["TSR:insertSchema", "TSR:updateSchema", "TSR:updateMetadata"] [true, true, true]
+proxyledger tpr insertUserAttributes SET-ETH-ADDRESS ["TAR:insertApp", "TAR:insertRevocation", "TAR:updateApp", "TAR:insertAppInfo", "TAR:insertAuthorization", "TAR:updateAuthorization", "TAR:insertAppPublicKey", "TAR:updateAppPublicKey", "TAR:insertAppAdministrator", "TAR:deleteAppAdministrator"] [true, true, true, true, true, true, true, true, true, true]

@@ -1,0 +1,12 @@
+# way of use:
+# ==> set domain https://api-test.ebsi.eu
+# ==> run issue_VerifiableAccreditationToAccredit <didIssuer> <didSubject> <issuerAttributeIdUrl> <reservedAttributeId>
+
+payloadVcTAO: load scripts/assets/VerifiableAccreditationToAccredit.json
+set payloadVcTAO.issuer $1
+set payloadVcTAO.credentialSubject.id $2
+set payloadVcTAO.credentialSubject.accreditedFor.0.schemaId domain /trusted-schemas-registry/v2/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM
+set payloadVcTAO.termsOfUse.0.id $3
+set payloadVcTAO.credentialSchema.id domain /trusted-schemas-registry/v2/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM
+set payloadVcTAO.credentialSubject.reservedAttributeId $4
+compute createVcJwt payloadVcTAO {} ES256

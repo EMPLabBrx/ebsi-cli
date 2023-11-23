@@ -1,0 +1,7 @@
+using user ES256
+conformance clientMockInitiate
+conformance check verifier_id_token_exchange
+conformance check verifier_vp_valid_vc
+conformance check verifier_vp_expired_vc
+conformance check verifier_vp_revoked_vc
+conformance check verifier_vp_not_yet_valid_vc

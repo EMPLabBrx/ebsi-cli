@@ -1,0 +1,973 @@
+[
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "didHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "firstAttrHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attributeVersionCount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attributesCount",
+          "type": "uint256"
+        }
+      ],
+      "name": "AddAdministratorAttribute",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "policyId",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "policyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "policy",
+          "type": "bytes"
+        }
+      ],
+      "name": "AddNewPolicy",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "shemaRevisionId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "name": "MetadataUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes",
+          "name": "schemaId",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "schema",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "name": "SchemaInserted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes",
+          "name": "schema",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "revision",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "name": "SchemaUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "didHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAttrHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAttrHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "firstAttrHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attributeVersionCount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attributesCount",
+          "type": "uint256"
+        }
+      ],
+      "name": "UpdateAdministratorAttribute",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "string",
+          "name": "policyId",
+          "type": "string"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "policyHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "policy",
+          "type": "bytes"
+        }
+      ],
+      "name": "UpdateExistingPolicy",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "SCHEMA_DIAMOND_STORAGE_POSITION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TSC_DIAMOND_STORAGE_POSITION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TSR_ADMINISTRATOR_DIAMOND_STORAGE_POSITION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "TSR_POLICY_DIAMOND_STORAGE_POSITION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "setTrustedPoliciesRegistryAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        }
+      ],
+      "name": "getAdministrator",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "anyAttrVersHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getAdministratorAttributeByHash",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "attribData",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "anyAttrVersHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAdministratorAttributeRevisions",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "items",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getAdministrators",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "items",
+          "type": "string[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "schemaId",
+          "type": "bytes"
+        }
+      ],
+      "name": "getLatestSchemaRevision",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "schema",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "schemaRevisionId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getLatestSchemaRevisionMetadataByRevisionId",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPolicies",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "items",
+          "type": "string[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "policyId",
+          "type": "string"
+        }
+      ],
+      "name": "getPolicy",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "revisionHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getPolicyByHash",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "policyId",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPolicyRevisions",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "items",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSchemaIds",
+      "outputs": [
+        {
+          "internalType": "bytes[]",
+          "name": "items",
+          "type": "bytes[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "schemaRevisionId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getSchemaRevision",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "schema",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "schemaId",
+          "type": "bytes"
+        },
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSchemaRevisionIds",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "items",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "metadataId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getSchemaRevisionMetadataByMetadataId",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "schemaRevisionId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint256",
+          "name": "page",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pageSize",
+          "type": "uint256"
+        }
+      ],
+      "name": "getSchemaRevisionMetadataIds",
+      "outputs": [
+        {
+          "internalType": "bytes32[]",
+          "name": "items",
+          "type": "bytes32[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "howMany",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "prev",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "next",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "version",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "attributeData",
+          "type": "bytes"
+        }
+      ],
+      "name": "insertAdministrator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "policyId",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "policyData",
+          "type": "bytes"
+        }
+      ],
+      "name": "insertPolicy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "schemaId",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "schema",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "name": "insertSchema",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "schemaRevisionId",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_version",
+          "type": "uint256"
+        }
+      ],
+      "name": "setVersion",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "attributeData",
+          "type": "bytes"
+        }
+      ],
+      "name": "updateAdministrator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "did",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "attributeData",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "lastVersHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "updateAdministrator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "schemaRevisionId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "name": "updateMetadata",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "metadataId",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "policyId",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes",
+          "name": "policyData",
+          "type": "bytes"
+        }
+      ],
+      "name": "updatePolicy",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "schemaId",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "schema",
+          "type": "bytes"
+        },
+        {
+          "internalType": "bytes",
+          "name": "metadata",
+          "type": "bytes"
+        }
+      ],
+      "name": "updateSchema",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "schemaRevisionId",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "version",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+  

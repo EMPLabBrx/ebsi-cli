@@ -1,0 +1,37 @@
+using user ES256 did2
+set user.issuerState issuer-state
+conformance-new clientMockInitiate
+
+jwks: conformance-new get /issuer-mock/jwks
+issuerMockDidNP: compute did2 jwks.keys.0
+
+set preAuthInTimePayload {"authorization_details":[{"type":"openid_credential","format":"jwt_vc","types":["VerifiableCredential","VerifiableAttestation","CTWalletSamePreAuthorisedInTime"],"locations":[""]}]}
+set preAuthInTimePayload.iss user.clientId
+set preAuthInTimePayload.sub issuerMockDidNP
+set preAuthInTimePayload.client_id issuerMockDidNP
+set preAuthInTimePayload.authorization_details[0].locations[0] user.clientId
+set preAuthHeaders {}
+set preAuthHeaders.kid user.keys.ES256.id
+preAuthorizedInTimeCode: compute signJwt preAuthInTimePayload ES256 preAuthHeaders
+
+set preAuthDeferredPayload {"authorization_details":[{"type":"openid_credential","format":"jwt_vc","types":["VerifiableCredential","VerifiableAttestation","CTWalletSamePreAuthorisedDeferred"],"locations":[""]}]}
+set preAuthDeferredPayload.iss user.clientId
+set preAuthDeferredPayload.sub issuerMockDidNP
+set preAuthDeferredPayload.client_id issuerMockDidNP
+set preAuthDeferredPayload.authorization_details[0].locations[0] user.clientId
+preAuthorizedDeferredCode: compute signJwt preAuthDeferredPayload ES256 preAuthHeaders
+
+userPin: compute userPin issuerMockDidNP
+
+conformance-new check issue_to_holder_initiate_ct_wallet_same_authorised_in_time
+conformance-new check issue_to_holder_validate_ct_wallet_same_authorised_in_time
+conformance-new check issue_to_holder_initiate_ct_wallet_same_authorised_deferred
+conformance-new check issue_to_holder_validate_ct_wallet_same_authorised_deferred
+conformance-new check issue_to_holder_initiate_ct_wallet_same_pre_authorised_in_time preAuthorizedInTimeCode userPin
+conformance-new check issue_to_holder_validate_ct_wallet_same_pre_authorised_in_time preAuthorizedInTimeCode userPin
+conformance-new check issue_to_holder_initiate_ct_wallet_same_pre_authorised_deferred preAuthorizedDeferredCode userPin
+conformance-new check issue_to_holder_validate_ct_wallet_same_pre_authorised_deferred preAuthorizedDeferredCode userPin
+
+compute wait 11
+conformance-new holder CTIssueQualificationCredential authorisedInTime ES256 empty skip-credential-offer
+conformance-new check request_ct_issue_to_holder_qualification_credential

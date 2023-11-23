@@ -1,0 +1,92 @@
+run bootstrap/0b-loadAdmin
+
+## Insert generic apps
+proxyledger tar insertApp ledger-api
+proxyledger tar insertApp did-registry-api
+proxyledger tar insertApp timestamp-api
+proxyledger tar insertApp trusted-issuers-registry-api
+proxyledger tar insertApp trusted-policies-registry-api
+proxyledger tar insertApp trusted-schemas-registry-api
+proxyledger tar insertApp storage-api
+proxyledger tar insertApp notifications-api
+proxyledger tar insertApp proxy-data-hub-api
+proxyledger tar insertApp ebsi-core-services
+proxyledger tar insertApp authorisation-api
+
+## Insert specific apps
+proxyledger tar insertApp did-registry-api_pilot-temp-01
+proxyledger tar insertApp timestamp-api_pilot-temp-01
+proxyledger tar insertApp trusted-issuers-registry-api_pilot-temp-01
+proxyledger tar insertApp trusted-policies-registry-api_pilot-temp-01
+proxyledger tar insertApp trusted-schemas-registry-api_pilot-temp-01
+proxyledger tar insertApp notifications-api_pilot-temp-01
+proxyledger tar insertApp proxy-data-hub-api_pilot-temp-01
+proxyledger tar insertApp authorisation-api_pilot-temp-01
+proxyledger tar insertApp users-onboarding-api_pilot-temp-01
+proxyledger tar insertApp test-app-pilot1
+proxyledger tar insertApp test-app-pilot2
+
+## Insert apps for e2e tests
+proxyledger tar insertApp did-registry-api_pilot-test-01
+proxyledger tar insertApp notifications-api_pilot-test-01
+proxyledger tar insertApp proxy-data-hub-api_pilot-test-01
+proxyledger tar insertApp timestamp-api_pilot-test-01
+proxyledger tar insertApp trusted-issuers-registry-api_pilot-test-01
+proxyledger tar insertApp trusted-policies-registry-api_pilot-test-01
+proxyledger tar insertApp trusted-schemas-registry-api_pilot-test-01
+
+## Authorizations between apps
+
+# APIs that need to access the blockchain through ledger-api
+#   Note: trusted-apps-registry-api doesn't require
+#   authorization because it connects directly to besu
+proxyledger tar insertAuthorization ledger-api did-registry-api
+proxyledger tar insertAuthorization ledger-api timestamp-api
+proxyledger tar insertAuthorization ledger-api trusted-issuers-registry-api
+proxyledger tar insertAuthorization ledger-api trusted-policies-registry-api
+proxyledger tar insertAuthorization ledger-api trusted-schemas-registry-api
+
+# APIs that need to access cassandra through storage-api
+proxyledger tar insertAuthorization storage-api notifications-api
+proxyledger tar insertAuthorization storage-api proxy-data-hub-api
+
+# With regarding users, each API will authorize tokens issued by
+# authorisation-api, and the set of API is defined as ebsi-core-services
+proxyledger tar insertAuthorization ebsi-core-services authorisation-api
+
+# Authorisations for testing purposes
+proxyledger tar insertAuthorization test-app-pilot1 test-app-pilot2
+proxyledger tar insertAuthorization storage-api test-app-pilot2
+proxyledger tar insertAuthorization ledger-api test-app-pilot2
+
+## Define public keys for APIs using the old version (generic apps)
+proxyledger tar insertAppPublicKey 0x8d508a564259616f0f035a5ac6b5f8c3f4223163261b2b3a07c8f3df9b08cbdd <PRIVATE-KEY> # did-registry-api
+proxyledger tar insertAppPublicKey 0xee52082af8acb4a3d78b668bb6ec2809e58e2b5c0c6612c92d872e18289951fc <PRIVATE-KEY> # timestamp-api
+proxyledger tar insertAppPublicKey 0x1795ede2b64392744b86bcf7d5af61aa783def0dbab758ed3b2670d6be130268 <PRIVATE-KEY> # trusted-issuers-registry-api
+proxyledger tar insertAppPublicKey 0xbeed83fa6ecc88546cb8cba6c370ad12b1136fc54cb347b583adf8446594d33f <PRIVATE-KEY> # trusted-policies-registry-api
+proxyledger tar insertAppPublicKey 0x462230ee44ba7f75752d829e359f7fc6dc495038440a0767e62d93dc30c98c47 <PRIVATE-KEY> # trusted-schemas-registry-api
+proxyledger tar insertAppPublicKey 0xb2317e0eec5efd96eccace2740b31850a437189caa378e5ca162a86e3a6379f8 <PRIVATE-KEY> # notifications-api
+proxyledger tar insertAppPublicKey 0xaf06f0c2b3fc140dd3d461e073aa9588806a48e3e54c6f5a3caa99fa8f6e6167 <PRIVATE-KEY> # proxy-data-hub-api
+proxyledger tar insertAppPublicKey 0x559c4f32dc35566e4b92b697499c38f3847a6c53f8344821c24354ead1f2ab1e <PRIVATE-KEY> # authorisation-api
+
+## Define public keys for APIs using the latest version
+proxyledger tar insertAppPublicKey 0xf8e19211b5255735c5264eda71b3fb52586503c4a48b0a727745fc618682043b <PRIVATE-KEY> # did-registry-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0x270321e53c610ec9a13e2fd823c393820960cf32a37309ec98808bffa69c7147 <PRIVATE-KEY> # timestamp-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0xe385c4eb306b7a46798638cf63bd6ceceee470861d1d74490b0e624e93000756 <PRIVATE-KEY> # trusted-issuers-registry-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0xa5bbd1dee2410ac8da4a998aec3ee0226ede6a0ad5b62207e053e7e4567e6a12 <PRIVATE-KEY> # trusted-policies-registry-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0xdb53a0e9d547bb4ce64099d755a75bd2f0f07462c7b56e9dcc8c4710766cd2cb <PRIVATE-KEY> # trusted-schemas-registry-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0x0d757c80b54f5f3496aa20498e7e4ebc6ff23c877f053d4f89afcb00479d6a6d <PRIVATE-KEY> # notifications-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0x58f6362154f607e99925959d62acffc4089b83a07ffea2484c296729e3393f33 <PRIVATE-KEY> # proxy-data-hub-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0x6295c85baca8d6957cc975c100535eeae0086f768e79829f548ce981393557c8 <PRIVATE-KEY> # authorisation-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0x0cfa02df489fd0fa197468ee0919023e1b393e2fb15edaf3feb9a32924d8e9fa <PRIVATE-KEY> # users-onboarding-api_pilot-temp-01
+proxyledger tar insertAppPublicKey 0x6e59a3303d47da29eac1ab6bd90244845fe8dbb8b82ab95baaee30f0a6d2b045 <PRIVATE-KEY> # test-app-pilot1
+proxyledger tar insertAppPublicKey 0x7b2506e8d27a8b26566e25b109302ffafc5c1972e484d568906b74eff606f275 <PRIVATE-KEY> # test-app-pilot2
+
+## Define public keys for APIs used in e2e tests
+proxyledger tar insertAppPublicKey 0xde146ccd61b7f99abd9b7da87df81f03cb2ff313a43d29c68262e0862c4ba7ba <PRIVATE-KEY> # did-registry-api_pilot-test-01
+proxyledger tar insertAppPublicKey 0x3e0dc63b97b1e7cb3a7d0b2da8f04ea956bc88e26423b3f1e94fdb0f0511d397 <PRIVATE-KEY> # notifications-api_pilot-test-01
+proxyledger tar insertAppPublicKey 0x52b71dd9660af6450d8fdc02767b1cad77bac742fb92eca94adfc993e747b875 <PRIVATE-KEY> # proxy-data-hub-api_pilot-test-01
+proxyledger tar insertAppPublicKey 0x38c974c33a877f2725046b05ff9d762809d3f8c0392bd3be31803ca2ddecf86b <PRIVATE-KEY> # timestamp-api_pilot-test-01
+proxyledger tar insertAppPublicKey 0x62c2b561c7f8c98795b8db9dff1c304c83ba5988664a40c561d92fe146009848 <PRIVATE-KEY> # trusted-issuers-registry-api_pilot-test-01
+proxyledger tar insertAppPublicKey 0xdf1f9efa300761aae5b586c6e8775ff3413cab87caf412e9e0876e84371d68cf <PRIVATE-KEY> # trusted-policies-registry-api_pilot-test-01
+proxyledger tar insertAppPublicKey 0x16b7cf8141898ad870d8342c5b79e46bb550f139462dda6da99742b63032ba22 <PRIVATE-KEY> # trusted-schemas-registry-api_pilot-test-01

@@ -1,0 +1,14 @@
+# load the Issuer of the accreditation
+using user null
+using user ES256K did1 <PRIVATE-KEY> <DID> <KEY-ID>
+
+# create the verifiable accreditation
+# (see JSON schemas repo: https://ec.europa.eu/digital-building-blocks/code/projects/EBSI/repos/json-schema/browse)
+vc: compute createVcJwt {"@context":["https://www.w3.org/2018/credentials/v1"],"id":"urn:uuid:1d1c0898-00af-464d-aefd-25bf126ca088","type":["VerifiableCredential","AccreditedVerifiableAttestation","VerifiableAccreditationTIPDA1"],"issuer":"did:ebsi:znVqHKmT14Y24LnBdAyxvh5","termsOfUse":[{"type":"VerifiableAccreditation","id":"https://api-pilot.ebsi.eu/trusted-issuers-registry/v2/issuers/did:ebsi:znVqHKmT14Y24LnBdAyxvh5/attributes/c239589665752a7d842f8cfd7c34f8e3cf2baa7c4f2ab0a011b07ed7c5cbed62"}],"issuanceDate":"2022-06-27T09:00:00Z","validFrom":"2022-06-27T09:00:00Z","expirationDate":"2030-06-27T09:00:00Z","issued":"2022-06-27T09:00:00Z","credentialSubject":{"id":"did:ebsi:zymB9WdGx7HcymaHoBqAVhf","authorisationClaims":[{"authorisedSchemaId":"https://api-pilot.ebsi.eu/trusted-schemas-registry/v1/schemas/0x50490ec4e2b3053f707cc121c26217cbec363f3b9e909175d073d04c73890f9a"}]},"credentialStatus":{"id":"https://essif.europa.eu/status/1","type":"CredentialsStatusList2020"},"credentialSchema":{"id":"https://api-pilot.ebsi.eu/trusted-schemas-registry/v1/schemas/0x9c26d19032deb5d72f4ac56f3b88c4025c6be8123c244fe57a7d6e5343b71b65","type":"FullJsonSchemaValidator2021"}} {"sub":"did:ebsi:zymB9WdGx7HcymaHoBqAVhf","jti":"urn:uuid:1d1c0898-00af-464d-aefd-25bf126ca088"}
+
+# load a user with rights to update the subject
+t: authorisation-old siop
+using token t
+
+# update the subject
+tir updateIssuer <DID SUBJECT> vc

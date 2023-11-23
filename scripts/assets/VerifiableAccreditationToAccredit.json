@@ -1,0 +1,35 @@
+{
+  "@context": ["https://www.w3.org/2018/credentials/v1"],
+  "id": "urn:uuid:8568b525-a24e-4bc0-9d97-6a8459ec0130",
+  "type": [
+    "VerifiableCredential",
+    "VerifiableAttestation",
+    "VerifiableAccreditation",
+    "VerifiableAccreditationToAccredit"
+  ],
+  "issuer": "",
+  "credentialSubject": {
+    "id": "",
+    "accreditedFor": [
+      {
+        "schemaId": "https://api-pilot.ebsi.eu/trusted-schemas-registry/v2/schemas/z3MgUFUkb722uq4x3dv5yAJmnNmzDFeK5UC8x83QoeLJM",
+        "types": [
+          "VerifiableCredential",
+          "VerifiableAttestation",
+          "CTRevocable"
+        ],
+        "limitJurisdiction": "https://publications.europa.eu/resource/authority/atu/FIN"
+      }
+    ]
+  },
+  "termsOfUse": [
+    {
+      "id": "",
+      "type": "IssuanceCertificate"
+    }
+  ],
+  "credentialSchema": {
+    "id": "https://api-pilot.ebsi.eu/trusted-schemas-registry/v2/schemas/zjVFNvbEBPAr3a724DttioZpgZmNr75BBtRzZqk7pkDe",
+    "type": "FullJsonSchemaValidator2021"
+  }
+}
